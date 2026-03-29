@@ -8,10 +8,10 @@
     <!-- Welcome Message - Más compacto -->
     <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 border border-gray-200 dark:border-gray-700">
         <h2 class="text-xl font-bold text-gray-900 dark:text-white">
-            ¡Bienvenido, {{ Auth::user()->name }}! 👋
+            {{ __('messages.welcome') }} {{ Auth::user()->name }}! 👋
         </h2>
         <p class="text-sm text-gray-600 dark:text-gray-400">
-            Panel de administración del sistema de gestión de la iglesia
+            {{ __('messages.admin_panel') }}
         </p>
     </div>
 
@@ -33,10 +33,10 @@
                     @php
                     $promocionesActivas = \App\Models\Promocion::where('activa', true)->count();
                     @endphp
-                    {{ $promocionesActivas }} {{ $promocionesActivas == 1 ? 'promoción' : 'promociones' }}
+                    {{ $promocionesActivas }} {{ $promocionesActivas == 1 ? __('messages.promotion') : __('messages.promotions_count') }}
                 </span>
             </div>
-            <h3 class="text-gray-600 dark:text-gray-400 text-xs font-medium mb-1">Total Estudiantes</h3>
+            <h3 class="text-gray-600 dark:text-gray-400 text-xs font-medium mb-1">{{ __('messages.total_students') }}</h3>
             <p class="text-2xl font-bold text-gray-900 dark:text-white">
                 @php
                 $totalEstudiantes = \App\Models\Estudiante::count();
@@ -49,8 +49,7 @@
                 ->whereYear('created_at', date('Y'))
                 ->count();
                 @endphp
-                <span class="text-green-600 dark:text-green-400 font-medium">{{ $estudiantesEsteMes }}</span> nuevos
-                este mes
+                <span class="text-green-600 dark:text-green-400 font-medium">{{ $estudiantesEsteMes }}</span> {{ __('messages.new_this_month') }}
             </p>
         </div>
 
@@ -68,10 +67,10 @@
                 </div>
                 <span class="text-xs font-medium text-green-600 dark:text-green-400">+0%</span>
             </div>
-            <h3 class="text-gray-600 dark:text-gray-400 text-xs font-medium mb-1">Eventos</h3>
+            <h3 class="text-gray-600 dark:text-gray-400 text-xs font-medium mb-1">{{ __('messages.events') }}</h3>
             <p class="text-2xl font-bold text-gray-900 dark:text-white">0</p>
             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                <span class="text-green-600 dark:text-green-400 font-medium">0</span> próximos
+                <span class="text-green-600 dark:text-green-400 font-medium">0</span> {{ __('messages.upcoming') }}
             </p>
         </div>
 
@@ -89,10 +88,10 @@
                 </div>
                 <span class="text-xs font-medium text-green-600 dark:text-green-400">+0%</span>
             </div>
-            <h3 class="text-gray-600 dark:text-gray-400 text-xs font-medium mb-1">Ministerios Activos</h3>
+            <h3 class="text-gray-600 dark:text-gray-400 text-xs font-medium mb-1">{{ __('messages.active_ministries') }}</h3>
             <p class="text-2xl font-bold text-gray-900 dark:text-white">0</p>
             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                <span class="text-purple-600 dark:text-purple-400 font-medium">0</span> miembros totales
+                <span class="text-purple-600 dark:text-purple-400 font-medium">0</span> {{ __('messages.total_members') }}
             </p>
         </div>
     </div>
@@ -101,7 +100,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1">
         <!-- Quick Actions -->
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 border border-gray-200 dark:border-gray-700">
-            <h3 class="text-base font-bold text-gray-900 dark:text-white mb-3">Acciones Rápidas</h3>
+            <h3 class="text-base font-bold text-gray-900 dark:text-white mb-3">{{ __('messages.quick_actions') }}</h3>
             <div class="space-y-2">
                 <a href="#"
                     class="flex items-center p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group">
@@ -112,7 +111,7 @@
                                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
                     </div>
-                    <span class="text-sm font-medium text-gray-900 dark:text-white">Agregar Nuevo Miembro</span>
+                    <span class="text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.add_member') }}</span>
                 </a>
 
                 <a href="#"
@@ -124,7 +123,7 @@
                                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
                     </div>
-                    <span class="text-sm font-medium text-gray-900 dark:text-white">Crear Nuevo Evento</span>
+                    <span class="text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.create_event') }}</span>
                 </a>
 
                 <a href="#"
@@ -137,14 +136,14 @@
                             </path>
                         </svg>
                     </div>
-                    <span class="text-sm font-medium text-gray-900 dark:text-white">Registrar Asistencia</span>
+                    <span class="text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.register_attendance') }}</span>
                 </a>
             </div>
         </div>
 
         <!-- Recent Activity -->
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 border border-gray-200 dark:border-gray-700">
-            <h3 class="text-base font-bold text-gray-900 dark:text-white mb-3">Actividad Reciente</h3>
+            <h3 class="text-base font-bold text-gray-900 dark:text-white mb-3">{{ __('messages.recent_activity') }}</h3>
             <div class="flex items-center justify-center h-32">
                 <div class="text-center">
                     <div class="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg inline-block mb-2">
@@ -154,7 +153,7 @@
                         </svg>
                     </div>
                     <p class="text-sm text-gray-500 dark:text-gray-400">
-                        No hay actividad reciente
+                        {{ __('messages.no_recent_activity') }}
                     </p>
                 </div>
             </div>

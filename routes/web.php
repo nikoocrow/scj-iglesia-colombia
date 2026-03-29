@@ -8,7 +8,7 @@ use App\Http\Controllers\PromocionController;
 use App\Http\Controllers\EstudianteController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +48,13 @@ Route::middleware('guest')->group(function () {
 
 // Rutas protegidas (solo para usuarios autenticados)
 Route::middleware('auth')->group(function () {
+
+    // Perfil / Configuración
+    Route::get('/configuracion', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('/configuracion/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
+    Route::post('/configuracion/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
+
+
     // Dashboard
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -66,6 +73,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('promociones/{promocion}/estudiantes/{estudiante}', [EstudianteController::class, 'destroy'])->name('estudiantes.destroy');
     // Importar CSV
     Route::post('promociones/{promocion}/importar-csv', [EstudianteController::class, 'importarCsv'])->name('estudiantes.importar-csv');
+    // Exportar Excel
+    Route::get('promociones/{promocion}/exportar-excel', [EstudianteController::class, 'exportarExcel'])->name('estudiantes.exportar-excel');
 });
 
 // Cambio de idioma

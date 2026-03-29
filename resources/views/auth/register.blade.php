@@ -5,7 +5,7 @@
 @section('content')
 <div>
     <h3 class="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-white">
-        Crear Cuenta
+        {{ __('messages.register') }}
     </h3>
 
     <!-- Mensajes de error -->
@@ -26,7 +26,7 @@
         <!-- Name -->
         <div class="mb-4">
             <label for="name" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                Nombre Completo
+                {{ __('messages.name') }}
             </label>
             <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus
                 class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-colors duration-200 @error('name') border-red-500 @enderror"
@@ -39,7 +39,7 @@
         <!-- Email -->
         <div class="mb-4">
             <label for="email" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                Correo Electrónico
+                {{ __('messages.email') }}
             </label>
             <input id="email" type="email" name="email" value="{{ old('email') }}" required
                 class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-colors duration-200 @error('email') border-red-500 @enderror"
@@ -52,7 +52,7 @@
         <!-- Password -->
         <div class="mb-4">
             <label for="password" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                Contraseña
+                {{ __('messages.password') }}
             </label>
             <input id="password" type="password" name="password" required
                 class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-colors duration-200 @error('password') border-red-500 @enderror"
@@ -66,7 +66,7 @@
         <!-- Password Confirmation -->
         <div class="mb-6">
             <label for="password_confirmation" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                Confirmar Contraseña
+                {{ __('messages.confirm_password') }}
             </label>
             <input id="password_confirmation" type="password" name="password_confirmation" required
                 class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-colors duration-200"
@@ -76,17 +76,17 @@
         <!-- Submit Button -->
         <button type="submit"
             class="w-full bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
-            Registrarse
+            {{ __('messages.register') }}
         </button>
     </form>
 
     <!-- Login Link -->
     <div class="mt-6 text-center">
         <p class="text-sm text-gray-600 dark:text-gray-400">
-            ¿Ya tienes una cuenta?
+            {{ __('messages.already_account') }}
             <a href="{{ route('login') }}"
                 class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-semibold">
-                Inicia sesión aquí
+                {{ __('messages.login_here') }}
             </a>
         </p>
     </div>

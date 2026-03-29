@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Estudiante;
 use App\Models\Promocion;
+use App\Exports\EstudiantesExport;
+use App\Services\DeepLService;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class EstudianteController extends Controller
@@ -27,6 +30,12 @@ class EstudianteController extends Controller
 
         $validated['promocion_id'] = $promocion->id;
 
+        // Traducir con DeepL
+        $deepl = new DeepLService();
+        if ($deepl->isConfigured()) {
+            $validated['translations'] = $deepl->translateEstudiante($validated);
+        }
+
         Estudiante::create($validated);
 
         return redirect()->route('promociones.show', $promocion)
@@ -48,6 +57,12 @@ class EstudianteController extends Controller
             'telefono' => 'nullable|string|max:255',
             'conoce_estudiantes' => 'nullable|string',
         ]);
+
+        // Re-traducir con DeepL si cambió algún campo traducible
+        $deepl = new DeepLService();
+        if ($deepl->isConfigured()) {
+            $validated['translations'] = $deepl->translateEstudiante($validated);
+        }
 
         $estudiante->update($validated);
 
@@ -115,6 +130,11 @@ public function importarCsv(Request $request, $promocionId)
         ->with('success', "Se importaron $importados estudiantes exitosamente");
 }
 
-
+    // Exportar estudiantes a Excel (.xlsx real)
+    public function exportarExcel(Promocion $promocion)
+    {
+        $nombre = 'Promocion_' . preg_replace('/[^A-Za-z0-9_\-]/', '_', $promocion->nombre) . '_' . date('Y-m-d') . '.xlsx';
+        return Excel::download(new EstudiantesExport($promocion), $nombre);
+    }
 
 }

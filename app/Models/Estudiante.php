@@ -22,11 +22,27 @@ class Estudiante extends Model
         'email',
         'telefono',
         'conoce_estudiantes',
+        'translations',
     ];
 
     protected $casts = [
         'fecha_nacimiento' => 'date',
+        'translations'     => 'array',
     ];
+
+    /**
+     * Devuelve un campo traducido al idioma activo, o el original si no hay traducción.
+     */
+    public function translated(string $field): ?string
+    {
+        $locale = app()->getLocale();
+
+        if ($locale !== 'es' && isset($this->translations[$locale][$field])) {
+            return $this->translations[$locale][$field];
+        }
+
+        return $this->$field;
+    }
 
     // Relación con promoción
     public function promocion()

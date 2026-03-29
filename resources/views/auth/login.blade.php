@@ -16,7 +16,7 @@
                 {{ config('app.name', 'Iglesia') }}
             </h2>
             <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                Sistema de Gestión
+                {{ __('messages.management_system') }}
             </p>
         </div>
 
@@ -56,7 +56,7 @@
                         <label>{{ __('messages.email') }}</label>
                     </label>
                     <input type="email" name="email" value="{{ old('email') }}" required autofocus
-                        class="w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:border-gray-600">
+                        class="w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:border-gray-600 text-gray-900 dark:text-gray-100">
                 </div>
 
                 <!-- Password -->
@@ -65,17 +65,17 @@
                         <label>{{ __('messages.password') }}</label>
                     </label>
                     <input type="password" name="password" required
-                        class="w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:border-gray-600">
+                        class="w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:border-gray-600 text-gray-900 dark:text-gray-100">
                 </div>
 
                 <div class="flex items-center justify-between mb-6">
                     <label class="flex items-center text-sm text-gray-600 dark:text-gray-400">
                         <input type="checkbox" name="remember" class="mr-2">
-                        Recordarme
+                        {{ __('messages.remember') }}
                     </label>
 
                     <a href="{{ route('password.request') }}" class="text-sm text-primary-600">
-                        ¿Olvidaste tu contraseña?
+                        {{ __('messages.forgot_password') }}
                     </a>
                 </div>
 
@@ -86,15 +86,15 @@
             </form>
 
             <div class="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
-                ¿No tienes una cuenta?
+                {{ __('messages.no_account') }}
                 <a href="{{ route('register') }}" class="text-primary-600 font-semibold">
-                    Regístrate aquí
+                    {{ __('messages.register_here') }}
                 </a>
             </div>
         </div>
 
         <div class="mt-6 text-center text-sm text-gray-500">
-            © {{ date('Y') }} {{ config('app.name') }}. Todos los derechos reservados.
+            © {{ date('Y') }} {{ config('app.name') }}. {{ __('messages.all_rights') }}.
         </div>
     </div>
 </div>
