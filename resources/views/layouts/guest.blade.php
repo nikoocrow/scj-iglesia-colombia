@@ -11,10 +11,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-screen bg-gray-50 dark:bg-gray-900 antialiased transition-colors">
+<body class="min-h-screen bg-indigo-50 dark:bg-slate-900 antialiased transition-colors">
+<div id="vanta-bg" class="fixed inset-0" style="z-index:0"></div>
 
     {{-- BOTONES SUPERIORES --}}
-    <div class="fixed top-4 right-4 z-50 flex items-center gap-2">
+    <div class="fixed top-4 right-4 flex items-center gap-2" style="z-index:50">
         {{-- Dark mode --}}
         <button id="darkModeToggle" class="w-10 h-10 shrink-0
            flex items-center justify-center
@@ -38,10 +39,42 @@
     </div>
 
     {{-- CONTENIDO --}}
-    <main class="min-h-screen flex items-center justify-center px-4">
+    <main class="min-h-screen flex items-center justify-center px-4 relative" style="z-index:10">
         @yield('content')
     </main>
 
+
+<!-- Vanta.js Clouds -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
+<script>
+    function initVanta() {
+        const isDark = document.documentElement.classList.contains('dark');
+        if (window._vantaEffect && typeof window._vantaEffect.destroy === 'function') {
+            window._vantaEffect.destroy();
+        }
+        window._vantaEffect = VANTA.NET({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            backgroundColor: isDark ? 0x0f172a : 0xf0f4ff,
+            color: isDark ? 0x3b82f6 : 0x2563eb,
+            points: 10.00,
+            maxDistance: 20.00,
+            spacing: 18.00,
+            speed: 1.0,
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initVanta);
+
+    // Re-inicializar cuando cambie el modo oscuro
+    const observer = new MutationObserver(() => initVanta());
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+</script>
 </body>
 
 </html>

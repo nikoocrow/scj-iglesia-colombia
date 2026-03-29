@@ -6,8 +6,8 @@ use Illuminate\Console\Command;
 
 class GenerarEstudiantesCSV extends Command
 {
-    protected $signature   = 'app:generar-csv';
-    protected $description = 'Genera un CSV con 1000 estudiantes de prueba';
+    protected $signature   = 'app:generar-csv {cantidad=1000 : Número de estudiantes a generar}';
+    protected $description = 'Genera un CSV con estudiantes de prueba';
 
     public function handle()
     {
@@ -73,11 +73,12 @@ class GenerarEstudiantesCSV extends Command
             'nacionalidad', 'email', 'telefono', 'conoce_estudiantes',
         ]);
 
-        $this->info('Generando 1000 estudiantes...');
-        $bar = $this->output->createProgressBar(1000);
+        $cantidad = (int) $this->argument('cantidad');
+        $this->info("Generando {$cantidad} estudiantes...");
+        $bar = $this->output->createProgressBar($cantidad);
         $bar->start();
 
-        for ($i = 1; $i <= 1000; $i++) {
+        for ($i = 1; $i <= $cantidad; $i++) {
             $nombre   = $nombres[array_rand($nombres)];
             $apellido1 = $apellidos[array_rand($apellidos)];
             $apellido2 = $apellidos[array_rand($apellidos)];
@@ -110,6 +111,6 @@ class GenerarEstudiantesCSV extends Command
         fclose($file);
         $bar->finish();
         $this->newLine(2);
-        $this->info("✅ Archivo generado en: storage/app/estudiantes_prueba.csv");
+        $this->info("✅ Archivo generado en: storage/app/estudiantes_prueba.csv ({$cantidad} estudiantes)");
     }
 }
