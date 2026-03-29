@@ -17,3 +17,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/.claude
+/public/avatars
+.DS_Store
+storage/.DS_Store
